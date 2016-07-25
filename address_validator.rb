@@ -21,7 +21,7 @@ module AddressValidator
       if (o.is_a?(String))
         values = o.split(",").map(&:strip)
         Hash[ FIELD_NAMES.zip(values) ]
-      elseif (o.is_a?(Hash))
+      elsif (o.is_a?(Hash))
         o
       else
         raise "Don't know how to parse #{o.class}"
