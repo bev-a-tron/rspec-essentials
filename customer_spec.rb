@@ -1,8 +1,5 @@
-RSpec::Matchers.define :be_discounted do |product, expected|
-  match do |customer|
-    customer.discount_amount_for(product) == discount
-  end
-end
+require 'rspec'
+require_relative 'customer'
 
 describe "product discount" do
   let(:product)      { "foo123"                           }
@@ -10,6 +7,7 @@ describe "product discount" do
   subject(:customer) { Customer.new(discounts: discounts) }
 
   it "detects when customer has a discount" do
-    expect(customer).to be_discounted(product, 0.1)
+    actual = customer.discount_amount_for(product)
+    expect(actual).to eq(0.1)
   end
 end
