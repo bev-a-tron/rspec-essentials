@@ -8,6 +8,19 @@ describe "product discount" do
 
   it "detects when customer has a discount" do
     actual = customer.discount_amount_for(product)
-    expect(actual).to eq(0.1)
+    if actual != 0.1
+      fail "Expected discount amount to equal 0.1 not #{actual}"
+    end
   end
+
+  context 'when discount is not 0.1' do
+    let(:discounts)    { { product => 0.2 }                 }
+    it "detects when customer has a discount" do
+      actual = customer.discount_amount_for(product)
+      if actual != 0.1
+        fail "Expected discount amount to equal 0.1 not #{actual}"
+      end
+    end
+  end
+
 end
