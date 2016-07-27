@@ -9,6 +9,9 @@ end
 
 RSpec::Matchers.define :be_named_lulu do
   match do |customer|
+    if customer.name != 'Lulu'
+      fail "Expected name to be Lulu, not #{customer.name}"
+    end
     customer.name == 'Lulu'
   end
 end
