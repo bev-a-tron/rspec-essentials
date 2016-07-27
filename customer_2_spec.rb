@@ -33,4 +33,7 @@ describe "product discount" do
 
   it { is_expected.to be_named_lulu }
 
+  it 'should be true' do
+    expect(1.5).to be_within(0.5).of(1.8)
+  end
 end
