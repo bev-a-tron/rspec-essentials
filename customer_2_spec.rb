@@ -15,4 +15,8 @@ describe "product discount" do
   it "detects when customer has a discount" do
     expect(customer).to be_discounted(product, 0.1)
   end
+
+  it { is_expected.to be_lollipop }
+
+  it { is_expected.to be_is_cat }
 end

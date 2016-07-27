@@ -11,4 +11,12 @@ class Customer
   def discount_amount_for(product_code)
     @discounts[product_code] || 0
   end
+
+  def lollipop?
+    true
+  end
+
+  def is_cat?
+    true
+  end
 end
