@@ -7,6 +7,12 @@ RSpec::Matchers.define :be_discounted do |product, expected|
   end
 end
 
+RSpec::Matchers.define :be_named_lulu do
+  match do |customer|
+    customer.name == 'Lulu'
+  end
+end
+
 describe "product discount" do
   let(:product)      { "foo123"                           }
   let(:discounts)    { { product => 0.1 }                 }
@@ -19,4 +25,7 @@ describe "product discount" do
   it { is_expected.to be_lollipop }
 
   it { is_expected.to be_is_cat }
+
+  it { is_expected.to be_named_lulu }
+
 end

@@ -19,4 +19,8 @@ class Customer
   def is_cat?
     true
   end
+
+  def name
+    'Lulu'
+  end
 end
