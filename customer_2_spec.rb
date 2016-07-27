@@ -9,11 +9,12 @@ end
 
 RSpec::Matchers.define :be_named_lulu do
   match do |customer|
-    customer.name == 'Lulu'
+    @actual = customer.name
+    actual == 'Lulu'
   end
 
-  failure_message do |customer|
-    "expected Lulu, got #{customer.name}"
+  failure_message do |name|
+    "expected Lulu, got #{name}"
   end
 end
 
