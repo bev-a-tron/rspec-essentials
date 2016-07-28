@@ -1,9 +1,25 @@
 require 'rspec'
 require_relative 'customer'
 
-RSpec::Matchers.define :be_discounted do |product, expected|
+RSpec::Matchers.define :be_discounted do |hsh|
   match do |customer|
-    customer.discount_amount_for(product) == expected
+    @customer = customer
+    @actual = hsh.keys.inject({}) do |memo, product, _|
+      memo[product] = @customer.discount_amount_for(product)
+      memo
+    end
+
+    differ = RSpec::Expectations.differ
+
+    @difference = differ.diff_as_object(hsh, @actual)
+    @difference == '' # blank diff means equality
+  end
+
+  failure_message do |actual|
+    "Expected #{@customer} to have discounts:\n"  +
+        "  #{actual.inspect}.\n"                      +
+        "Diff: "                                      +
+        @difference
   end
 end
 
@@ -24,7 +40,7 @@ describe "product discount" do
   subject(:customer) { Customer.new(discounts: discounts) }
 
   it "detects when customer has a discount" do
-    expect(customer).to be_discounted(product, 0.1)
+    expect(customer).to be_discounted({a: 0.2, b: 0.4, c: 10})
   end
 
   it { is_expected.to be_lollipop }

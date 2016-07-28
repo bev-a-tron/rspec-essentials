@@ -21,6 +21,6 @@ class Customer
   end
 
   def name
-    'Lulu'
+    'Lou'
   end
 end
