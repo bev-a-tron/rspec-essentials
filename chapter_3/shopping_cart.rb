@@ -28,4 +28,16 @@ RSpec.describe ShoppingCart do
       end
     end
   end
+
+  context "using RSpec's allow_any_instance_of" do
+    it "returns the sum of the prices of all products" do
+      num_products  = 22
+      price         = 100
+      cart          = ShoppingCart.new
+      some_products = [Product.new] * num_products
+      expect_any_instance_of(ShoppingCart).to receive(:products).and_return(some_products)
+      allow_any_instance_of(Product).to receive(:price).and_return(price)
+      expect(cart.total_price).to eq(num_products * price)
+    end
+  end
 end
